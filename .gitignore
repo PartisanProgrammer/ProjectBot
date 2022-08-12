@@ -570,3 +570,7 @@ Mickey Mouse Garden/Assets/Plugins/Zenject/Source/Zenject.csproj.meta
 # Log files can be ignored.
 fmod_editor.log
 
+
+
+#Custom
+ProjectBot/Private/*
