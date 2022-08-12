@@ -3,7 +3,7 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
-
+using ProjectBot.Private;
 
 
 class Program
@@ -23,14 +23,13 @@ class Program
             .AddSingleton(_client)
             .AddSingleton(_commands)
             .BuildServiceProvider();
-
-        string token = "MTAwNzcwOTQ4Njk5NzMxNTcxNQ.G-raGK.3LWBOKwygBWr8kX_u0Si6HUnvTwnfOh6FziAgA";
+        
 
         _client.Log += _client_Log;
 
         await RegisterCommandsAsync();
 
-        await _client.LoginAsync(TokenType.Bot, token);
+        await _client.LoginAsync(TokenType.Bot, PrivateInfo.token);
 
         await _client.StartAsync();
         await Task.Delay(-1);
