@@ -32,6 +32,7 @@ class Program
         await _client.LoginAsync(TokenType.Bot, PrivateInfo.token);
 
         await _client.StartAsync();
+        
         await Task.Delay(-1);
 
     }
@@ -55,7 +56,7 @@ class Program
         if (message.Author.IsBot) return;
 
         int argPos = 0;
-        if (message.HasStringPrefix("/", ref argPos))
+        if (message.HasStringPrefix("666 ", ref argPos))
         {
             var result = await _commands.ExecuteAsync(context, argPos, _services);
             if (!result.IsSuccess) Console.WriteLine(result.ErrorReason);
