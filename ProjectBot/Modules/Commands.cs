@@ -20,5 +20,15 @@ public class Commands : ModuleBase<SocketCommandContext>{
         await ReplyAsync($"Sacrificing {user.Mention} by means of {deathCauses.getCause()}");
     }
     
+    //Create a command that will allow the user to change the bot's nickname
+    [Command("ChangeBotNickname")]
+    public async Task ChangeBotNickname(string nickname){
+        await Context.Guild.CurrentUser.ModifyAsync(x => {
+            x.Nickname = nickname + "bot";
+        });
+        await ReplyAsync($"Changed my nickname to {nickname}");
+    }
     
+    
+
 }
