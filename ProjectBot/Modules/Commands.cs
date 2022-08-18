@@ -142,7 +142,7 @@ public class DemonSO : ScriptableObject
     public async Task LoopEdit(Task<RestUserMessage> task){
         while (true){
             await Task.Delay(2000);
-            await task.Result.ModifyAsync(m => { m.Content = SetLoopString(); });
+            await task.Result.ModifyAsync(m => { m.Content = CreateSentence(); });
         }
 
     }
@@ -151,26 +151,50 @@ public class DemonSO : ScriptableObject
     // - length is random between 3 and 10
     // - each character is a random character from the alphabet
     string ReturnWord(){
-        
-        // string word = "";
-        // for (int i = 0; i < Random.Shared.Next(3,8); i++){
-        //     //word += (char)Random.Shared.Next(97, 123);
-        //     word+= ScaryAlphabet.alphabet[Random.Shared.Next(0,ScaryAlphabet.alphabet.Count)];
-        // }
-        return ScaryAlphabet.alphabet[Random.Shared.Next(0,ScaryAlphabet.alphabet.Count)];
-    }   
-    string SetLoopString(){
-        string loopString = "";
-        for (int i = 0; i < 5; i++){
-            
-            for (int y = 0; y < Random.Shared.Next(3,8); y++){
-                loopString += ReturnWord() + " ";
+        var word = ScaryAlphabet.GetLetter();
+        //Sets amount of letters in a word
+        for (int i = 0; i < Random.Shared.Next(3,8); i++){
+            //Sets space between letters
+            for (int x = 0; x <1; x++){
+                word += " ";
             }
-            loopString += "\r\n";
+            word += ScaryAlphabet.GetLetter();
         }
+        return word;
+    }   
+    string CreateSentence(){
+        var loopString = ReturnWord();
         
-        
-        return loopString;
+        for (int i = 0; i <1; i++){
+            loopString += " ";
+            loopString += " ";
+            loopString += " ";
+            loopString += " ";
+            loopString += ReturnWord();
+        }
+        for (int i = 0; i <1; i++){
+            loopString += " ";
+            loopString += " ";
+            loopString += " ";
+            loopString += " ";
+            loopString += ReturnWord();
+        }
+       
+        //Sets space between words and words in a sentence.
+        for (int i = 0; i < 3; i++){
+            
+            loopString += "\r\n";
+            loopString += ReturnWord();
+            
+        }
+
+        var idk = loopString;
+        idk += " ";
+        idk += " ";
+        idk += " ";
+        idk += " ";
+        idk += ReturnWord();
+        return idk;
         
     }
 }
