@@ -11,7 +11,7 @@ class Program
     DiscordSocketClient _client;
     CommandService _commands;
     IServiceProvider _services;
-    
+
     static void Main(string[] args) => new Program().RunBotAsync().GetAwaiter().GetResult();
     
     public async Task RunBotAsync()
@@ -33,8 +33,20 @@ class Program
 
         await _client.StartAsync();
         
+        //Listens to messages, useful for realtime feedback and responses
+        _client.MessageReceived+= AddReaction;
+
         await Task.Delay(-1);
 
+    }
+
+    public static async Task AddReaction(SocketMessage message){
+        if (message.Author.Id == PrivateInfo.JESPER_ID){
+            //Tea Emoji
+            await message.AddReactionAsync(new Emoji("\uD83C\uDF75"));
+            await Task.Delay(50);
+            await message.RemoveAllReactionsAsync();
+        }
     }
 
     private Task _client_Log(LogMessage arg)
