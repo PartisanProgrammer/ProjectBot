@@ -38,15 +38,29 @@ class Program
 
         await Task.Delay(-1);
 
+
+
     }
 
     public static async Task AddReaction(SocketMessage message){
-        if (message.Author.Id == PrivateInfo.JESPER_ID){
+        if (message.Author.Id == PrivateInfo.BEN_ID){
             //Tea Emoji
-            await message.AddReactionAsync(new Emoji("\uD83C\uDF75"));
-            await Task.Delay(50);
-            await message.RemoveAllReactionsAsync();
+             ReactMultipleTimes(message);
         }
+        
+    }
+
+    static async Task ReactMultipleTimes(SocketMessage message){
+        for (int i = 0; i < 10; i++){
+            await ReactAndUnReact(message, "\uD83C\uDF75");
+        }
+    }
+
+    static async Task ReactAndUnReact(SocketMessage message, string emoteString){
+        await message.AddReactionAsync(new Emoji(emoteString));
+        await Task.Delay(50);
+        await message.RemoveAllReactionsAsync();
+        await Task.Delay(1000);
     }
 
     private Task _client_Log(LogMessage arg)
